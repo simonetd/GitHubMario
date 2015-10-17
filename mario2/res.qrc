@@ -14,8 +14,8 @@
         <file>bonus.png</file>
         <file>turtle.png</file>
         <file>block.png</file>
-        <file>menuBg.png</file>
         <file>menuBgw.jpg</file>
+        <file>brique.png</file>
     </qresource>
     <qresource prefix="/map">
         <file>map1.txt</file>

@@ -12,6 +12,7 @@ class character:public QObject, public QGraphicsPixmapItem
 public:
     character(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
+    void keyReleaseEvent(QKeyEvent *event);
     void gravity();
 signals:
 
@@ -20,13 +21,18 @@ public slots:
 private:
     QMediaPlayer * stovesound;
     bool grounded;
-    int bas;
-    int haut;
-    int gauche;
+    int stand;
     int droite;
+    int gauche;
     int gravitys;
     int gravityspeedmax=15;
     int once;
+protected:
+    int collisionbas;
+    int collisionhaut;
+    int collisiongauche;
+    int collisiondroite;
+
 
 };
 

@@ -9,6 +9,8 @@
 #include "health.h"
 
 class game: public QGraphicsView{
+public slots:
+    void focuspeach2(QGraphicsView*);
 public:
     game(QWidget * parent=0);
 

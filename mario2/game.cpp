@@ -15,6 +15,7 @@
 #include <floor.h>
 #include <block.h>
 #include <bonus.h>
+#include <brique.h>
 #include <QDebug>
 #include <typeinfo>
 
@@ -24,13 +25,11 @@ game::game(QWidget *parent){
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1200,600);
     setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
-    //view = new QGraphicsView;
-
-
+    QGraphicsView * view = new QGraphicsView(scene);
     setScene(scene);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200,600);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setFixedSize(600,300);
 
     QFile fichier(":/map/map1.txt");
     if(fichier.open(QFile::ReadOnly)){
@@ -59,10 +58,22 @@ game::game(QWidget *parent){
                     scene->addItem(blockk);
             }
                 if(lineread.at(i)=='3'){
-                    bonus * bon = new bonus();
+                    bonus * bon = new bonus ();
                     bon->setPos(x,y);
                     x=x+25;
                     scene->addItem(bon);
+            }
+                if(lineread.at(i)=='4'){
+                    brique * bri = new brique();
+                    bri->setPos(x,y);
+                    x=x+25;
+                    scene->addItem(bri);
+            }
+                if(lineread.at(i)=='9'){
+                    ennemy * Wario = new ennemy();
+                    Wario->setPos(x,y);
+                    x=x+25;
+                    scene->addItem(Wario);
             }
         }x=0;y=y-25;
     }
@@ -72,29 +83,35 @@ game::game(QWidget *parent){
 
 
     character * peach = new character();
-   // peach->setRect(0,0,100,100); // change the rect from 0x0 (default) to 100x100 pixels
     peach->setPos(0,450);
     peach->setFlag(QGraphicsItem::ItemIsFocusable);
     peach->setFocus();
     scene->addItem(peach);
 
 
-    // create the score/healthb
     Score = new score();
     scene->addItem(Score);
     Health = new health();
     Health->setPos(Health->x(),Health->y()+25);
     scene->addItem(Health);
+    view->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
+    view->centerOn(peach);
 
-//    QMediaPlayer * music = new QMediaPlayer();
-//    music->setMedia(QUrl("qrc:/sounds/music.mp3"));
-//    music->play();
+    QTimer * focuspeach = new QTimer();
+    QObject::connect(focuspeach,SIGNAL(timeout()),this,SLOT(focuspeach2(view)));
+    focuspeach->start(10);
+   QMediaPlayer * music = new QMediaPlayer();
+   music->setMedia(QUrl("qrc:/sounds/music.mp3"));
+    music->play();
 
 
 
 
 
-    show();
+    view->show();
 }
 
+void game::focuspeach2(QGraphicsView *view){
+    view->centerOn(peach);
+}
 

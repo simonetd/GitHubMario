@@ -6,12 +6,13 @@
 #include <stdlib.h>
 #include <QGraphicsItem>
 #include <ctime>
+#include <character.h>
 
-class ennemy: public QObject, public QGraphicsPixmapItem
+class ennemy: public character
 {
     Q_OBJECT
 public:
-    ennemy(QGraphicsItem * parent=0);
+    ennemy();
 
 private:
     bool direction=rand()%true;
