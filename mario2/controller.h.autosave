@@ -1,0 +1,17 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
+
+class controller
+{
+public:
+    controller();
+    void gravity();
+
+signals:
+
+public slots:
+    void down();
+};
+
+#endif // CONTROLLER_H

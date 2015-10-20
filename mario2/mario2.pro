@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     bonus.cpp \
     block.cpp \
     menu.cpp \
-    brique.cpp
+    brique.cpp \
+    controller.cpp
 
 HEADERS  += \
     character.h \
@@ -38,7 +39,8 @@ HEADERS  += \
     bonus.h \
     block.h \
     menu.h \
-    brique.h
+    brique.h \
+    controller.h
 
 FORMS    +=
 
