@@ -6,10 +6,7 @@ class controller
 {
 public:
     controller();
-
-signals:
-
-public slots:
+    void gravity();
 };
 
 #endif // CONTROLLER_H
