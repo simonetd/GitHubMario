@@ -79,7 +79,7 @@ void menu::jouer()
 {
     this->hide();
     Game = new game();
-    Game->show();
+   // Game->show();
 }
 
 void menu::jouer(int i)

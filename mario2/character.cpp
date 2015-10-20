@@ -28,88 +28,109 @@ character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 
 void character::keyPressEvent(QKeyEvent *event)
 {
-     if (event->key() == Qt::Key_Escape){
-         //game::game->hide();
-         Menu->show();
-         Game->close();
-     }
-     if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
-             setPos(x()-8,y());
+   if (event->key() == Qt::Key_U){
+      qDebug() << this->boundingRect().width();
+    qDebug() << this->boundingRect().height();
+    qDebug() << this->boundingRect().x();
+  qDebug() << this->boundingRect().y();
+   }
+    if (event->key() == Qt::Key_Escape){
+        //game::game->hide();
+        Menu->show();
+        Game->close();
+    }
+    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
 
-     }
-      if (event->key() == Qt::Key_D && droite==0 || event->key() == Qt::Key_Right && droite==0){
-
-         if (pos().x()+100<1200)
-         setPos(x()+5,y());
-         once=0;
-     }
-     if (event->key() == Qt::Key_Space){
-         // create a stove
-         stove * Stove = new stove();
-         Stove->setPos(x()+51,y()+80);
-         stovesound= new QMediaPlayer();
-         stovesound->setMedia(QUrl("qrc:/sounds/sm64_impact.wav"));
-         scene()->addItem(Stove);
-         if (stovesound->state() == QMediaPlayer::PlayingState){
-             stovesound->setPosition(0);
-         }
-         else if (stovesound->state() == QMediaPlayer::StoppedState){
-         stovesound->play();
-         }
+        gauche=1;
+        droite=0;
 
     }
-      if (event->key()== Qt::Key_A){
-         ennemy * Wario = new ennemy();
-         scene()->addItem(Wario);
-     }
-     if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
-         if (grounded==1){
-             gravitys=-15;
-            qDebug() << "Jump";
+    if (event->key() == Qt::Key_D && collisiondroite==0 || event->key() == Qt::Key_Right && collisiondroite==0){
+
+        if (pos().x()+100<1200){
+            gauche=0;
+            droite=1;
+        }
+
+    }
+    if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
+        if (grounded==1){
+            gravitys=-15;
             grounded=0;
             gravity();
 
-         }
-     }
+        }
+    }
 }
 
 
 
 
 void character::down()
-    {
+{
     grounded = 0;
-    haut=0;
-    droite=0;
-    gauche=0;
+    collisionhaut=0;
+    collisiondroite=0;
+    collisiongauche=0;
+
     QList<QGraphicsItem *> test3 = collidingItems();
     for (int i=0;i<test3.size();i++){
         if ( test3[i]->y() > this->y()+this->boundingRect().y()){
             grounded=1;
             gravitys=0;
-            if(once==0 && (test3[i]->y()-this->boundingRect().height()-this->y()<5)){
-                qDebug() << "Repositionnement";
-            this->setPos(x(),test3[i]->y()-this->boundingRect().height());
-            once=1;}
+
+          //  if(test3[i]->y()- this->boundingRect().height()-this->y() <2 ){
+            //this->setPos(x(),test3[i]->y()-this->boundingRect().height());
+          //     once=1;
+          // }
         }
-       if (test3[i]->y()<this->y()+this->boundingRect().height()-10){
-         if (test3[i]->x()>this->x()){
-              droite=1;
+        if (test3[i]->y()+test3[i]->boundingRect().y()-this->y()<3){
+            gravitys=0;
+        }
+        if (test3[i]->y()<this->y()+this->boundingRect().height()-10){
+            if (test3[i]->x()>this->x()){
+                collisiondroite=1;
             }
-            else gauche=1;
+            else collisiongauche=1;
         }
-       }
-      gravity();
+
+    }
+    gravity();
+
+
+    if (droite==1 && collisiondroite==0){
+        setPos(x()+4,y());
+        once=0;
+    }
+    if (gauche==1 && collisiongauche==0){
+        setPos(x()-4,y());
+        once=0;
     }
 
+
+}
 
 void character::gravity()
 {
     if (grounded==0 && gravitys<gravityspeedmax){
-    gravitys=gravitys+2;
-    this->setPos(x(),y()+gravitys);
+        gravitys=gravitys+2;
+        this->setPos(x(),y()+gravitys);
     }
 
 }
+
+
+void character::keyReleaseEvent(QKeyEvent *event)
+{
+    if(!(event ->isAutoRepeat()))
+    {
+        if((event->key()==Qt::Key_Right || (event->key()== Qt::Key_Left) || event->key() == Qt::Key_Q || event->key() == Qt::Key_D))
+        {
+            droite=0;
+            gauche=0;
+        }
+    }
+}
+
 
 
