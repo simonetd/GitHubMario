@@ -23,10 +23,9 @@ game::game(QWidget *parent){
 
 
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,1200,600);
+    scene->setSceneRect(0,0,1200,300);
     setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
     QGraphicsView * view = new QGraphicsView(scene);
-    setScene(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(600,300);
@@ -36,7 +35,7 @@ game::game(QWidget *parent){
         QTextStream in (&fichier);
         QString lineread;
         int x=0;
-        int y=575;
+        int y=275;
         while(!in.atEnd())
         {
             lineread=in.readLine();
@@ -83,7 +82,7 @@ game::game(QWidget *parent){
 
 
     character * peach = new character();
-    peach->setPos(0,450);
+    peach->setPos(0,225);
     peach->setFlag(QGraphicsItem::ItemIsFocusable);
     peach->setFocus();
     scene->addItem(peach);
@@ -97,12 +96,9 @@ game::game(QWidget *parent){
     view->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
     view->centerOn(peach);
 
-    QTimer * focuspeach = new QTimer();
-    QObject::connect(focuspeach,SIGNAL(timeout()),this,SLOT(focuspeach2(view)));
-    focuspeach->start(10);
-   //QMediaPlayer * music = new QMediaPlayer();
-   //music->setMedia(QUrl("qrc:/sounds/music.mp3"));
-    //music->play();
+//   QMediaPlayer * music = new QMediaPlayer();
+//   music->setMedia(QUrl("qrc:/sounds/music.mp3"));
+//    music->play();
 
 
 
@@ -111,7 +107,4 @@ game::game(QWidget *parent){
     view->show();
 }
 
-void game::focuspeach2(QGraphicsView *view){
-    view->centerOn(peach);
-}
 
