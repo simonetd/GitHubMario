@@ -97,7 +97,7 @@ void menu::niveauxSelect(){
 
     QGraphicsScene * menuNiveaux = new QGraphicsScene();
     menuNiveaux->setSceneRect(0,0,1200,600);
-    QImage imageFontTemp("://images/menuBg.png");
+    QImage imageFontTemp("://images/menuBgw.jpg");
     QImage imageFont = imageFontTemp.scaled(1200, 600);
     setBackgroundBrush(QBrush(imageFont));
     setScene(menuNiveaux);
@@ -105,22 +105,30 @@ void menu::niveauxSelect(){
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200,600);
 
-    int i=niveauxNombre;
+    QPushButton *boutonNv1 = new QPushButton("Niveau 1");
+    boutonNv1->setStyleSheet("border: none;"
+                               "color: blue;"
+                               "font: bold 20px;"
+                               "background-color: pink");
+    boutonNv1->setGeometry(QRect(200, 100, 200, 30));
 
-    //QList<QPushButton*> boutonNiveaux;
-    QPushButton * boutonNiveaux = new QPushButton[i];
+    QPushButton *boutonNv2 = new QPushButton("Niveau 2");
+    boutonNv2->setStyleSheet("border: none;"
+                               "color: blue;"
+                               "font: bold 20px;"
+                               "background-color: pink");
+    boutonNv2->setGeometry(QRect(500, 100, 200, 30));
 
-    for(int i=1; i<niveauxNombre+1; i++){
-        //QPushButton *p=new QPushButton("Niveau : "+i);
-        boutonNiveaux->setText("Niveau : "+i);
-        boutonNiveaux->setStyleSheet("border: none;"
-                                   "color: blue;"
-                                   "font: bold 20px;"
-                                   "background-color: pink");
-        boutonNiveaux->setGeometry(QRect(500, 200+i, 200, 30));
+    QPushButton *boutonNv3 = new QPushButton("Niveau 3");
+    boutonNv3->setStyleSheet("border: none;"
+                               "color: blue;"
+                               "font: bold 20px;"
+                               "background-color: pink");
+    boutonNv3->setGeometry(QRect(800, 100, 200, 30));
 
-        menuNiveaux->addWidget(boutonNiveaux);
-    }
+    menuNiveaux->addWidget(boutonNv1);
+    menuNiveaux->addWidget(boutonNv2);
+    menuNiveaux->addWidget(boutonNv3);
 
     QPushButton *boutonRetour = new QPushButton("Retour au menu principal");
     boutonRetour->setStyleSheet("border: none;"
