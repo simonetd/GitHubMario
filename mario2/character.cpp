@@ -5,7 +5,7 @@
 #include <QGraphicsScene>
 #include <floor.h>
 #include <QTimer>
-#include <game.h>
+#include "game.h"
 #include <typeinfo>
 #include <QList>
 #include <block.h>
@@ -50,6 +50,7 @@ void character::keyPressEvent(QKeyEvent *event)
         if (pos().x()+100<1200){
             gauche=0;
             droite=1;
+            //game::view->centerOn(game::peach);
         }
 
     }
