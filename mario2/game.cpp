@@ -100,9 +100,9 @@ game::game(QWidget *parent){
     QTimer * focuspeach = new QTimer();
     QObject::connect(focuspeach,SIGNAL(timeout()),this,SLOT(focuspeach2(view)));
     focuspeach->start(10);
-   QMediaPlayer * music = new QMediaPlayer();
-   music->setMedia(QUrl("qrc:/sounds/music.mp3"));
-    music->play();
+   //QMediaPlayer * music = new QMediaPlayer();
+   //music->setMedia(QUrl("qrc:/sounds/music.mp3"));
+    //music->play();
 
 
 
