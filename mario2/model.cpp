@@ -13,7 +13,7 @@ model::model()
     this->ennemys = new QList<ennemy *>;
 
     peach = new character();
-    peach->setPos(0,450);
+    peach->setPos(0,225);
 
    // this->allitems = new QList<QList *>;
 
