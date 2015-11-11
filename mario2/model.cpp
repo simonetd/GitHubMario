@@ -1,6 +1,7 @@
 #include "model.h"
 #include "QFile"
 #include "floor.h"
+#include "character.h"
 #include "QTextStream"
 
 model::model()
@@ -10,6 +11,10 @@ model::model()
     this->briques = new QList<brique *>;
     this->bonuss = new QList<bonus *>;
     this->ennemys = new QList<ennemy *>;
+
+    peach = new character();
+    peach->setPos(0,450);
+
    // this->allitems = new QList<QList *>;
 
 //    allitems->append(flors);

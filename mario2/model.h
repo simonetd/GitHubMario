@@ -18,10 +18,12 @@ public:
    inline QList<bonus *> *getBonuss(){return bonuss;}
    inline QList<brique *> *getBriques(){return briques;}
    inline QList<ennemy *> *getEnnemys(){return ennemys;}
+   inline character *getPeach(){return peach;}
 signals:
 
 public slots:
 private:
+    character *peach;
     QList<floor*> *flors;
     //QList<QList *> *allitems;
     QList<block*> *blocks;
