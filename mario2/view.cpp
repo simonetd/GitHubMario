@@ -1,6 +1,7 @@
 #include "view.h"
 #include "controller.h"
 #include "model.h"
+#include <QKeyEvent>
 
 
 
@@ -40,3 +41,27 @@ void view::map()
     view->show();
 }
 
+void view::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
+        control->moveMarioLeft();
+    }
+    if (event->key() == Qt::Key_D|| event->key() == Qt::Key_Right){
+        control->moveMarioRight();
+    }
+    if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
+        control->moveMarioJump();
+    }
+}
+
+void view::keyReleaseEvent(QKeyEvent *event)
+{
+    if(!(event ->isAutoRepeat()))
+    {
+        if((event->key()==Qt::Key_Right || (event->key()== Qt::Key_Left) || event->key() == Qt::Key_Q || event->key() == Qt::Key_D))
+        {
+           control->MarioStand();
+        }
+        control->MarioStand();
+    }
+}

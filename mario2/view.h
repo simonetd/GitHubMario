@@ -14,6 +14,8 @@ public:
     view();
     void setControl(controller *control){this->control = control;}
     void map();
+    void keyPressEvent(QKeyEvent * event);
+    void keyReleaseEvent(QKeyEvent *event);
 private:
     controller *control;
 };
