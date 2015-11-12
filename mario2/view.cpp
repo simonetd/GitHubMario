@@ -38,7 +38,7 @@ void view::map()
          scene->addItem(control->getmodel()->getEnnemys()->at(i));
     }
     scene->addItem(control->getmodel()->getPeach());
-    centerOn(control->getmodel()->getPeach());
+    view->centerOn(control->getmodel()->getPeach());
     view->show();
 }
 
@@ -60,7 +60,7 @@ void view::keyPressEvent(QKeyEvent *event)
         control->moveMarioJump();
         qDebug()<<"saut presse";
         break;
- //   this->update();
+//    this->centerOn(control->getmodel()->getPeach());
     }
 
 //    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
