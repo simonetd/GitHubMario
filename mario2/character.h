@@ -16,9 +16,12 @@ public:
     void setgravitys(int a);
     bool getgrounded(){return grounded;}
     void setgrounded(bool b);
+
+
 signals:
 
 public slots:
+
 
 private:
     QMediaPlayer * stovesound;

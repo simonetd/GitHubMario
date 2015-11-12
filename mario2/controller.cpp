@@ -4,6 +4,7 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <QObject>
+#include <QTimer>
 
 
 controller::controller(model *m, view *v) : QObject()
@@ -12,6 +13,10 @@ controller::controller(model *m, view *v) : QObject()
     this->View = v;
     this->View->setControl(this);
     v->map();
+
+    QTimer * testDown = new QTimer();
+    QObject::connect(testDown,SIGNAL(timeout()),this,SLOT(down()));
+    testDown->start(50);
 }
 
 controller::~controller()
@@ -27,6 +32,9 @@ void controller::moveMarioLeft(){
 void controller::moveMarioRight(){
     gauche=0;
     droite=1;
+    Model->getPeach()->setPos(Model->getPeach()->x()+5,Model->getPeach()->y());
+//    View->update();
+    qDebug()<<"moveRight";
 }
 
 void controller::moveMarioJump()

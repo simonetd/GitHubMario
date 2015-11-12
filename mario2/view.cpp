@@ -2,12 +2,13 @@
 #include "controller.h"
 #include "model.h"
 #include <QKeyEvent>
+#include <QDebug>
 
 
 
 view::view()
 {
-
+    this->grabKeyboard();
 
 
 }
@@ -43,15 +44,34 @@ void view::map()
 
 void view::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
+    switch (event->key()) {
+    case Qt::Key_Q:
+    case Qt::Key_Left:
         control->moveMarioLeft();
-    }
-    if (event->key() == Qt::Key_D|| event->key() == Qt::Key_Right){
+        break;
+    case Qt::Key_D:
+    case Qt::Key_Right:
         control->moveMarioRight();
-    }
-    if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
+        qDebug()<<"droite pressee";
+        break;
+    case Qt::Key_Z:
+    case Qt::Key_Up:
+    case Qt::Key_Space:
         control->moveMarioJump();
+        qDebug()<<"saut presse";
+        break;
+ //   this->update();
     }
+
+//    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
+//        control->moveMarioLeft();
+//    }
+//    if (event->key() == Qt::Key_D|| event->key() == Qt::Key_Right){
+//        control->moveMarioRight();
+//    }
+//    if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
+//        control->moveMarioJump();
+//    }
 }
 
 void view::keyReleaseEvent(QKeyEvent *event)
