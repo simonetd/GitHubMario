@@ -15,9 +15,8 @@ extern menu * Menu;
 character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
     setPixmap(QPixmap(":/images/peach right.png").scaled(25,25));
-    grounded = 0;
+    grounded = 1;
     gravitys=0;
-
 }
 
 void character::setgravitys(int a)

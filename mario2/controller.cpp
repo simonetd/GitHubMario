@@ -55,7 +55,7 @@ void controller::MarioStand()
 void controller::gravity()
 {
     if (Model->getPeach()->getgrounded()== false && Model->getPeach()->getgravitys()<gravityspeedmax){
-        Model->getPeach()->setgravitys(2);
+        Model->getPeach()->setgravitys(Model->getPeach()->getgravitys()-2);
         Model->getPeach()->setY(Model->getPeach()->y() + Model->getPeach()->getgravitys());
     }
 }
