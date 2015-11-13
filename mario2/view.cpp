@@ -37,6 +37,9 @@ void view::map()
     for (int i=0; i<control->getmodel()->getEnnemys()->size();i++){
          scene->addItem(control->getmodel()->getEnnemys()->at(i));
     }
+    for (int i=0; i<control->getmodel()->getPieces()->size();i++){
+         scene->addItem(control->getmodel()->getPieces()->at(i));
+    }
     scene->addItem(control->getmodel()->getPeach());
     view->centerOn(control->getmodel()->getPeach());
     view->show();

@@ -11,6 +11,7 @@ model::model()
     this->briques = new QList<brique *>;
     this->bonuss = new QList<bonus *>;
     this->ennemys = new QList<ennemy *>;
+    this->pieces = new QList<piece *>;
 
     peach = new character();
     peach->setPos(0,225);
@@ -57,6 +58,12 @@ model::model()
                     ennemy * Wario = new ennemy();
                     Wario->setPos(x,y);
                     ennemys->append(Wario);
+                    x=x+25;
+            }
+                if(lineread.at(i)=='5'){
+                    piece * Money = new piece();
+                    Money->setPos(x,y);
+                    pieces->append(Money);
                     x=x+25;
             }
         }x=0;y=y-25;

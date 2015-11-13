@@ -6,6 +6,7 @@
 #include <bonus.h>
 #include <brique.h>
 #include <ennemy.h>
+#include <piece.h>
 
 class floor;
 
@@ -18,6 +19,7 @@ public:
    inline QList<bonus *> *getBonuss(){return bonuss;}
    inline QList<brique *> *getBriques(){return briques;}
    inline QList<ennemy *> *getEnnemys(){return ennemys;}
+   inline QList<piece *> *getPieces(){return pieces;}
    inline character *getPeach(){return peach;}
 signals:
 
@@ -30,5 +32,6 @@ private:
     QList<bonus*> *bonuss;
     QList<brique*> *briques;
     QList<ennemy*> *ennemys;
+    QList<piece*> *pieces;
 };
 #endif // MODEL_H
