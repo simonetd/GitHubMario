@@ -6,7 +6,7 @@
 
 QT       += core gui \
             multimedia
-
+QMAKE_MAC_SDK = macosx10.11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     brique.cpp \
     controller.cpp \
     view.cpp \
-    model.cpp
+    model.cpp \
+    piece.cpp
 
 HEADERS  += \
     character.h \
@@ -44,7 +45,8 @@ HEADERS  += \
     brique.h \
     controller.h \
     view.h \
-    model.h
+    model.h \
+    piece.h
 
 FORMS    +=
 
