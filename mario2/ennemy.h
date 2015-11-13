@@ -18,8 +18,6 @@ private:
     bool direction=rand()%true;
 signals:
 public slots:
-        void move();
 };
 
 #endif // ENNEMY_H
-        void move();

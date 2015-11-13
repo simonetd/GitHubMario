@@ -85,3 +85,8 @@ void view::keyReleaseEvent(QKeyEvent *event)
         control->MarioStand();
     }
 }
+
+void view::deleteItem(ennemy *item)
+{
+    scene()->removeItem(item);
+}

@@ -14,9 +14,13 @@ controller::controller(model *m, view *v) : QObject()
     this->View->setControl(this);
     v->map();
 
-    QTimer * testDown = new QTimer();
-    QObject::connect(testDown,SIGNAL(timeout()),this,SLOT(down()));
-    testDown->start(50);
+    QTimer * TimerPeach = new QTimer();
+    QObject::connect(TimerPeach,SIGNAL(timeout()),this,SLOT(down()));
+    TimerPeach->start(50);
+
+    QTimer * TimerEnnemys = new QTimer();
+    QObject::connect(TimerEnnemys,SIGNAL(timeout()),this,SLOT(move()));
+    TimerEnnemys->start(50);
 }
 
 controller::~controller()
@@ -32,9 +36,6 @@ void controller::moveMarioLeft(){
 void controller::moveMarioRight(){
     gauche=0;
     droite=1;
-    Model->getPeach()->setPos(Model->getPeach()->x()+5,Model->getPeach()->y());
-//    View->update();
-    qDebug()<<"moveRight";
 }
 
 void controller::moveMarioJump()
@@ -91,3 +92,27 @@ void controller::down()
     }
 }
 
+void controller::move()
+{
+    for (int i=0; i<Model->getEnnemys()->length();i++){
+        QList<QGraphicsItem *> colliding_items = Model->getEnnemys()->at(i)->collidingItems();
+        for (int i=0, n = colliding_items.size(); i < n;i++){
+            if(typeid(*(colliding_items[i])) == typeid(character)){
+                View->deleteItem(Model->getEnnemys()->at(i));
+                delete Model->getEnnemys()->at(i);
+                return;}
+            }
+        if(Model->getEnnemys()->at(i)->pos().x()<=0 || Model->getEnnemys()->at(i)->pos().x()+100>=1200 || collisiondroite == 1 || collisiongauche==1){
+            direction=!direction;
+
+        }
+        if(this->direction==1){
+            Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()+3);
+
+        }
+        if(this->direction==0) {
+            Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()-3);
+        }
+    }
+
+}

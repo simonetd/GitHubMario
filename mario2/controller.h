@@ -20,12 +20,14 @@ public:
 
 public slots:
     void down();
+    void move();
 private:
     model *Model;
     view *View;
     int stand;
     int droite;
     int gauche;
+    int direction;
     int gravityspeedmax=15;
     int once;
     int collisionhaut=0;
