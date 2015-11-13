@@ -18,7 +18,7 @@ void view::map()
     QGraphicsScene * scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1200,300);
     QGraphicsView * view = new QGraphicsView(scene);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(600,300);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));

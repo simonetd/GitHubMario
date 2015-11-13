@@ -15,13 +15,6 @@ model::model()
     peach = new character();
     peach->setPos(0,225);
 
-   // this->allitems = new QList<QList *>;
-
-//    allitems->append(flors);
-//    allitems->append(blocks);
-//    allitems->append(briques);
-//    allitems->append(ennemys);
-
     QFile fichier(":/map/map1.txt");
     if(fichier.open(QFile::ReadOnly)){
         QTextStream in (&fichier);
@@ -60,12 +53,12 @@ model::model()
                     briques->append(bri);
                     x=x+25;
             }
-//                if(lineread.at(i)=='9'){
-//                    ennemy * Wario = new ennemy();
-//                    Wario->setPos(x,y);
-//                    ennemys->append(Wario);
-//                    x=x+25;
-//            }
+                if(lineread.at(i)=='9'){
+                    ennemy * Wario = new ennemy();
+                    Wario->setPos(x,y);
+                    ennemys->append(Wario);
+                    x=x+25;
+            }
         }x=0;y=y-25;
     }
         ;
