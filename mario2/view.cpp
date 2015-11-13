@@ -63,16 +63,6 @@ void view::keyPressEvent(QKeyEvent *event)
         break;
 //    this->centerOn(control->getmodel()->getPeach());
     }
-
-//    if (event->key() == Qt::Key_Q || event->key() == Qt::Key_Left){
-//        control->moveMarioLeft();
-//    }
-//    if (event->key() == Qt::Key_D|| event->key() == Qt::Key_Right){
-//        control->moveMarioRight();
-//    }
-//    if (event->key() == Qt::Key_Z || event->key() == Qt::Key_Up){
-//        control->moveMarioJump();
-//    }
 }
 
 void view::keyReleaseEvent(QKeyEvent *event)
