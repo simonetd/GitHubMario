@@ -15,10 +15,10 @@ view::view()
 
 void view::map()
 {
-    QGraphicsScene * scene = new QGraphicsScene();
+    scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1200,300);
     QGraphicsView * view = new QGraphicsView(scene);
-    //view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(600,300);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
@@ -55,13 +55,11 @@ void view::keyPressEvent(QKeyEvent *event)
     case Qt::Key_D:
     case Qt::Key_Right:
         control->moveMarioRight();
-        qDebug()<<"droite pressee";
         break;
     case Qt::Key_Z:
     case Qt::Key_Up:
     case Qt::Key_Space:
         control->moveMarioJump();
-        qDebug()<<"saut presse";
         break;
 //    this->centerOn(control->getmodel()->getPeach());
     }
@@ -89,7 +87,7 @@ void view::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void view::deleteItem(ennemy *item)
+void view::deleteItem(QGraphicsItem* item)
 {
-    scene()->removeItem(item);
+    scene->removeItem(item);
 }

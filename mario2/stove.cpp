@@ -13,10 +13,14 @@ stove::stove(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
     setPixmap(QPixmap(":/images/turtle.png"));
     //100,50,10,10)
+    range=0;
+    rangemax=400;
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
     timer->start(50);
+
+
 }
 
 void stove::move()

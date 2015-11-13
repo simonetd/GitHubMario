@@ -17,9 +17,10 @@ public:
     void map();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
-    void deleteItem(ennemy* item);
+    void deleteItem(QGraphicsItem* item);
 private:
     controller *control;
+    QGraphicsScene * scene;
 };
 
 #endif // VIEW_H

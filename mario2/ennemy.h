@@ -13,9 +13,9 @@ class ennemy: public character
     Q_OBJECT
 public:
     ennemy();
-
+    bool getdirection(){return direction;}
 private:
-    bool direction=rand()%true;
+    bool direction;
 signals:
 public slots:
 };

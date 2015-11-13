@@ -13,6 +13,10 @@ controller::controller(model *m, view *v) : QObject()
     this->View = v;
     this->View->setControl(this);
     v->map();
+    gravityspeedmax=15;
+    collisionhaut=0;
+    collisiondroite=0;
+    collisiongauche=0;
 
     QTimer * TimerPeach = new QTimer();
     QObject::connect(TimerPeach,SIGNAL(timeout()),this,SLOT(down()));
@@ -94,23 +98,23 @@ void controller::down()
 
 void controller::move()
 {
+
     for (int i=0; i<Model->getEnnemys()->length();i++){
         QList<QGraphicsItem *> colliding_items = Model->getEnnemys()->at(i)->collidingItems();
         for (int i=0, n = colliding_items.size(); i < n;i++){
-            if(typeid(*(colliding_items[i])) == typeid(character)){
-                View->deleteItem(Model->getEnnemys()->at(i));
-                delete Model->getEnnemys()->at(i);
-                return;}
-            }
         if(Model->getEnnemys()->at(i)->pos().x()<=0 || Model->getEnnemys()->at(i)->pos().x()+100>=1200 || collisiondroite == 1 || collisiongauche==1){
             direction=!direction;
-
         }
-        if(this->direction==1){
+        if(typeid(*(colliding_items[i])) == typeid(character)){
+            View->deleteItem(Model->getEnnemys()->at(i));
+            delete Model->getEnnemys()->at(i);
+            Model->getEnnemys()->removeAt(i);
+            return;}
+        }
+        if(Model->getEnnemys()->at(i)->getdirection()==true){
             Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()+3);
-
         }
-        if(this->direction==0) {
+        if(Model->getEnnemys()->at(i)->getdirection()==false) {
             Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()-3);
         }
     }

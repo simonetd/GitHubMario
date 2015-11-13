@@ -15,6 +15,7 @@ extern game * Game;
 ennemy::ennemy()
 {
     setPixmap(QPixmap(":/images/ennemy.png").scaled(25,25));
+    direction=rand()%true;
 }
 
 

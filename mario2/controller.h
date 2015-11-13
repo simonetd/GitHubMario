@@ -28,11 +28,11 @@ private:
     int droite;
     int gauche;
     int direction;
-    int gravityspeedmax=15;
+    int gravityspeedmax;
     int once;
-    int collisionhaut=0;
-    int collisiondroite=0;
-    int collisiongauche=0;
+    int collisionhaut;
+    int collisiondroite;
+    int collisiongauche;
 
 };
 

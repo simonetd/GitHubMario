@@ -14,8 +14,8 @@ public:
 signals:
 
 private:
-    unsigned short int range=0;
-    unsigned short int rangemax=400;
+    unsigned short int range;
+    unsigned short int rangemax;
 public slots:
     void move();
 };
