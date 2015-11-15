@@ -1,7 +1,6 @@
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QGraphicsView>
 #include <QApplication>
-#include "game.h"
 #include "model.h"
 #include "controller.h"
 #include "view.h"

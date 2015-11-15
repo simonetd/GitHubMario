@@ -4,7 +4,6 @@
 #include <QGraphicsScene>
 #include <floor.h>
 #include <QTimer>
-#include "game.h"
 #include "controller.h"
 #include <block.h>
 
