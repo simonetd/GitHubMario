@@ -13,10 +13,12 @@ class controller;
 
 class view : public QGraphicsView
 {
+    Q_OBJECT
 public:
     view();
     void setControl(controller *control){this->control = control;}
     void map();
+    void menu();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
     void deleteItem(QGraphicsItem* item);
@@ -24,11 +26,17 @@ public:
     score* getScore(){return this->Jackpot;}
     void pieceSound();
     void jumpSound();
+public slots:
+    void jouer();
+signals:
+    void clicked();
 private:
     controller *control;
     QGraphicsScene * scene;
     score * Jackpot;
     health * Life;
+    QGraphicsScene * menuFont;
+
 };
 
 #endif // VIEW_H
