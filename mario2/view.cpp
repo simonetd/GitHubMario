@@ -3,7 +3,8 @@
 #include "model.h"
 #include <QKeyEvent>
 #include <QDebug>
-
+#include "health.h"
+#include "score.h"
 
 
 view::view()
@@ -40,6 +41,11 @@ void view::map()
     for (int i=0; i<control->getmodel()->getPieces()->size();i++){
          scene->addItem(control->getmodel()->getPieces()->at(i));
     }
+    Jackpot = new score();
+    scene->addItem(Jackpot);
+    Life = new health();
+    Life->setPos(Life->x(),Life->y()+25);
+    scene->addItem(Life);
     scene->addItem(control->getmodel()->getPeach());
     view->centerOn(control->getmodel()->getPeach());
     view->show();

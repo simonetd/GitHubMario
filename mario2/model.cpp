@@ -56,8 +56,8 @@ model::model()
             }
                 if(lineread.at(i)=='9'){
                     ennemy * Wario = new ennemy();
-                    Wario->setPos(x,y);
-                    ennemys->append(Wario);
+                    Wario->setPos(x,y);                   
+                    ennemys->append(Wario);                    
                     x=x+25;
             }
                 if(lineread.at(i)=='5'){

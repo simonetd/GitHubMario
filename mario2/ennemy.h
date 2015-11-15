@@ -14,6 +14,7 @@ class ennemy: public character
 public:
     ennemy();
     bool getdirection(){return direction;}
+    void changedirection();
 private:
     bool direction;
 signals:

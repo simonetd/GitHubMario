@@ -5,6 +5,8 @@
 #include "controller.h"
 #include "QObject"
 #include "character.h"
+#include "health.h"
+#include "score.h"
 
 
 class controller;
@@ -18,9 +20,13 @@ public:
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
     void deleteItem(QGraphicsItem* item);
+    health* getHealth(){return this->Life;}
+    score* getScore(){return this->Jackpot;}
 private:
     controller *control;
     QGraphicsScene * scene;
+    score * Jackpot;
+    health * Life;
 };
 
 #endif // VIEW_H

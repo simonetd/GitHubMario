@@ -16,6 +16,12 @@ ennemy::ennemy()
 {
     setPixmap(QPixmap(":/images/ennemy.png").scaled(25,25));
     direction=rand()%true;
+    setgravitys(0);
+}
+
+void ennemy::changedirection()
+{
+    this->direction = !direction;
 }
 
 

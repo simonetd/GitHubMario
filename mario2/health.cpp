@@ -25,8 +25,3 @@ void health::decrease()
       // QMessageBox::GameOver(this, "Game Over", "Il n'est pas difficile de jouer, mais de s'arrêter de jouer.?", QMessageBox ::Recommencer | QMessageBox::Recommencer);
     }
 }
-
-int health::gethealth()
-{
-    return Health;
-}

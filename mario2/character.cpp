@@ -29,4 +29,14 @@ void character::setgrounded(bool b)
     this->grounded = b;
 }
 
+void character::setcollisiondroite(int c)
+{
+    this->collisiondroite = c;
+}
+
+void character::setcollisiongauche(int d)
+{
+    this->collisiongauche = d;
+}
+
 

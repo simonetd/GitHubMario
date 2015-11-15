@@ -9,7 +9,7 @@ public:
     health(QGraphicsItem * parent=0);
     void decrease();
     void increase();
-    int gethealth();
+    int gethealth(){return this->Health;}
 private:
     int Health;
 signals:

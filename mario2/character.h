@@ -16,6 +16,10 @@ public:
     void setgravitys(int a);
     bool getgrounded(){return grounded;}
     void setgrounded(bool b);
+    void setcollisiondroite(int c);
+    void setcollisiongauche(int d);
+    int getcollisiondroite(){return collisiondroite;}
+    int getcollisiongauche(){return collisiongauche;}
 
 
 signals:
@@ -27,6 +31,8 @@ private:
     QMediaPlayer * stovesound;
     bool grounded;
     int gravitys;
+    int collisiondroite;
+    int collisiongauche;
 };
 
 #endif // CHARACTER_H

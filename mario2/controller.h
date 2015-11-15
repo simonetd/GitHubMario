@@ -16,8 +16,7 @@ public:
     void moveMarioRight();
     void moveMarioJump();
     void MarioStand();
-    void gravity();
-
+    void gravity(character* item);
 public slots:
     void down();
     void move();
@@ -31,8 +30,7 @@ private:
     int gravityspeedmax;
     int once;
     int collisionhaut;
-    int collisiondroite;
-    int collisiongauche;
+
 
 };
 
