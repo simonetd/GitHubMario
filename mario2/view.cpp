@@ -22,21 +22,21 @@ void view::menu()
 
 
     menuFont = new QGraphicsScene();
-    menuFont->setSceneRect(0,0,1200,600);
+    menuFont->setSceneRect(0,0,600,300);
     QImage imageFontTemp("://images/menuBgw.jpg");
-    QImage imageFont = imageFontTemp.scaled(1200, 600);
+    QImage imageFont = imageFontTemp.scaled(600, 300);
     setBackgroundBrush(QBrush(imageFont));
     setScene(menuFont);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200,600);
+    setFixedSize(600,300);
 
     QPushButton *boutonJouer = new QPushButton("Jouer");
     boutonJouer->setStyleSheet("border: none;"
                                "color: blue;"
                                "font: bold 20px;"
                                "background-color: pink");
-    boutonJouer->setGeometry(QRect(500, 300, 200, 30));
+    boutonJouer->setGeometry(QRect(100, 50, 200, 30));
 
 //    QPushButton *boutonNiveaux = new QPushButton("Choix du niveau");
 //    boutonNiveaux->setStyleSheet("border: none;"
@@ -50,7 +50,7 @@ void view::menu()
                                  "color: red;"
                                  "font: bold 20px;"
                                  "background-color: blue");
-    boutonQuitter->setGeometry(QRect(150, 200, 200, 30));
+    boutonQuitter->setGeometry(QRect(100, 250, 200, 30));
 
     QObject::connect(boutonJouer, SIGNAL(clicked()), this, SLOT(jouer()));
     //QObject::connect(boutonNiveaux, SIGNAL(clicked()), this, SLOT(niveauxSelect()));
@@ -67,7 +67,7 @@ void view::jouer()
 {
     this->hide();
 //    qDeleteAll(scene->items());
-    this->map();
+    map();
 }
 
 
