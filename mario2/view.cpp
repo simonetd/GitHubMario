@@ -3,6 +3,7 @@
 #include "model.h"
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMediaPlayer>
 #include "health.h"
 #include "score.h"
 
@@ -49,6 +50,9 @@ void view::map()
     scene->addItem(control->getmodel()->getPeach());
     view->centerOn(control->getmodel()->getPeach());
     view->show();
+//       QMediaPlayer * music = new QMediaPlayer();
+//       music->setMedia(QUrl("qrc:/sounds/music.mp3"));
+//        music->play();
 }
 
 void view::keyPressEvent(QKeyEvent *event)
@@ -86,4 +90,18 @@ void view::keyReleaseEvent(QKeyEvent *event)
 void view::deleteItem(QGraphicsItem* item)
 {
     scene->removeItem(item);
+}
+
+void view::pieceSound()
+{
+    QMediaPlayer * pieceSound = new QMediaPlayer();
+    pieceSound->setMedia(QUrl("qrc:/sounds/piece.wav"));
+    pieceSound->play();
+}
+
+void view::jumpSound()
+{
+    QMediaPlayer * jumpSound = new QMediaPlayer();
+    jumpSound->setMedia(QUrl("qrc:/sounds/jump.wav"));
+    jumpSound->play();
 }

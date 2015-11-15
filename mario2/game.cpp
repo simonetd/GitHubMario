@@ -96,9 +96,7 @@ game::game(QWidget *parent){
     view->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
     view->centerOn(peach);
 
-//   QMediaPlayer * music = new QMediaPlayer();
-//   music->setMedia(QUrl("qrc:/sounds/music.mp3"));
-//    music->play();
+
 
 
 

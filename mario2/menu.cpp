@@ -68,17 +68,13 @@ menu::menu(QWidget *parent)
     menuFont->addWidget(boutonNiveaux);
     menuFont->addWidget(boutonQuitter);
 
-
-    //Score = new score();
-    //scene->addItem(Score);
-
     show();
 }
 
 void menu::jouer()
 {
     this->hide();
-    Game = new game();
+    //Game = new game();
    // Game->show();
 }
 

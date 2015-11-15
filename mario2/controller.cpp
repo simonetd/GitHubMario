@@ -46,6 +46,7 @@ void controller::moveMarioJump()
     if (Model->getPeach()->getgrounded()== true){
         Model->getPeach()->setgravitys(-15);
         Model->getPeach()->setgrounded(false);
+        View->jumpSound();
         gravity(Model->getPeach());
     }
 }
@@ -88,6 +89,8 @@ void controller::down()
             View->deleteItem(test3[i]);
             delete test3[i];
             View->getScore()->increase();
+            View->pieceSound();
+
         }
     }
     gravity(Model->getPeach());
@@ -116,7 +119,8 @@ void controller::move()
                 Model->getEnnemys()->at(i)->changedirection();
             }
             if(typeid(*(colliding_items[k])) == typeid(character) || Model->getEnnemys()->at(i)->y() > 300){
-                View->deleteItem(Model->getEnnemys()->at(i));
+               // Rajouter Collision Haut pr delete l'ennemy et si collision haut ne pas decrease
+               View->deleteItem(Model->getEnnemys()->at(i));
                 delete Model->getEnnemys()->at(i);
                 Model->getEnnemys()->removeAt(i);
                 View->getHealth()->decrease();

@@ -19,7 +19,6 @@ SOURCES += main.cpp \
     character.cpp \
     stove.cpp \
     ennemy.cpp \
-    game.cpp \
     score.cpp \
     health.cpp \
     floor.cpp \
@@ -36,7 +35,6 @@ HEADERS  += \
     character.h \
     stove.h \
     ennemy.h \
-    game.h \
     score.h \
     health.h \
     floor.h \

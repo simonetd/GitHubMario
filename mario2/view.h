@@ -22,6 +22,8 @@ public:
     void deleteItem(QGraphicsItem* item);
     health* getHealth(){return this->Life;}
     score* getScore(){return this->Jackpot;}
+    void pieceSound();
+    void jumpSound();
 private:
     controller *control;
     QGraphicsScene * scene;
