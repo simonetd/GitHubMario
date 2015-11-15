@@ -3,7 +3,7 @@
         <file>mparty8_peach_07.wav</file>
         <file>music.mp3</file>
         <file>sm64_impact.wav</file>
-        <file>../../piece.wav</file>
+        <file>piece.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>peach right.png</file>
