@@ -1,14 +1,11 @@
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QGraphicsView>
 #include <QApplication>
-#include "menu.h"
 #include "game.h"
 #include "model.h"
 #include "controller.h"
 #include "view.h"
 
-//game * Game;
-menu * Menu;
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);

@@ -7,7 +7,6 @@
 #include "game.h"
 #include "controller.h"
 #include <block.h>
-#include "menu.h"
 
 
 character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
