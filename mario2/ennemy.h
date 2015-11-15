@@ -17,8 +17,6 @@ public:
     void changedirection();
 private:
     bool direction;
-    bool grounded;
-    int gravitys;
 };
 
 #endif // ENNEMY_H
