@@ -9,8 +9,6 @@
 #include <block.h>
 #include "menu.h"
 
-extern game * Game ;
-extern menu * Menu;
 
 character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {

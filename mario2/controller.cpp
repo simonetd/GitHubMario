@@ -24,6 +24,10 @@ controller::controller(model *m, view *v) : QObject()
     QTimer * TimerEnnemys = new QTimer();
     QObject::connect(TimerEnnemys,SIGNAL(timeout()),this,SLOT(move()));
     TimerEnnemys->start(50);
+
+    QTimer * TimerCollision = new QTimer();
+    QObject::connect(TimerCollision,SIGNAL(timeout()),this,SLOT(testCollision()));
+    TimerCollision->start(10);
 }
 
 controller::~controller()
@@ -109,6 +113,7 @@ void controller::move()
         Model->getEnnemys()->at(i)->setgrounded(false);
 
         QList<QGraphicsItem *> colliding_items = Model->getEnnemys()->at(i)->collidingItems();
+<<<<<<< Updated upstream
         for (int k=0, n = colliding_items.size(); k < n;k++){
             Model->getEnnemys()->at(i)->setgrounded(false);
             if ( colliding_items[k]->y() > Model->getEnnemys()->at(i)->y()+Model->getEnnemys()->at(i)->boundingRect().y()){
@@ -125,6 +130,28 @@ void controller::move()
                 Model->getEnnemys()->removeAt(i);
                 View->getHealth()->decrease();
                 return;}
+=======
+        for (int i=0, n = colliding_items.size(); i < n;i++){
+            if(Model->getEnnemys()->at(i)->pos().x()<=0 || Model->getEnnemys()->at(i)->pos().x()+100>=1200 || collisiondroite == 1 || collisiongauche==1){
+                Model->getEnnemys()->at(i)->setDirection(!Model->getEnnemys()->at(i)->getdirection());
+                //direction=!direction;
+                qDebug()<<"collision laterale";
+            }
+            if(typeid(*(colliding_items[i])) == typeid(character)){
+                if (Model->getEnnemys()->at(i)->pos().x() == Model->getPeach()->x() || Model->getEnnemys()->at(i)->pos().x()+100 == Model->getPeach()->x()){
+                    //on touche sur le cote donc une vie en moins
+                    qDebug()<<"coté touché";
+                    return;
+                }
+                if (Model->getEnnemys()->at(i)->pos().y() == Model->getPeach()->y()+30){
+                    View->deleteItem(Model->getEnnemys()->at(i));
+                    delete Model->getEnnemys()->at(i);
+                    Model->getEnnemys()->removeAt(i);
+                    qDebug()<<"touché en haut";
+                    return;
+                }
+            }
+>>>>>>> Stashed changes
         }
         gravity(Model->getEnnemys()->at(i));
         if(Model->getEnnemys()->at(i)->getdirection()==1){
