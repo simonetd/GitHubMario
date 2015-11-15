@@ -14,15 +14,7 @@ class ennemy: public character
 public:
     ennemy();
     bool getdirection(){return direction;}
-<<<<<<< Updated upstream
     void changedirection();
-=======
-    void setDirection(bool);
-    void setgrounded(bool b);
-    bool getgrounded(){return grounded;}
-    void setgravitys(int a);
-    int getgravitys(){return gravitys;}
->>>>>>> Stashed changes
 private:
     bool direction;
     bool grounded;
