@@ -7,17 +7,17 @@
     </qresource>
     <qresource prefix="/images">
         <file>peach right.png</file>
-        <file>bg2.jpg</file>
-        <file>peach left.png</file>
         <file>ennemy.png</file>
         <file>floor.png</file>
         <file>bg.png</file>
         <file>bonus.png</file>
-        <file>turtle.png</file>
         <file>block.png</file>
         <file>menuBgw.jpg</file>
         <file>brique.png</file>
-        <file>piece.png</file>
+        <file>Star_coin.png</file>
+        <file>cake.png</file>
+        <file>Peach/Peach1.png</file>
+        <file>Peach/Peach2.png</file>
     </qresource>
     <qresource prefix="/map">
         <file>map1.txt</file>

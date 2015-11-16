@@ -2,6 +2,6 @@
 
 piece::piece(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
-    setPixmap(QPixmap(":/images/piece.png").scaled(20,20));
+    setPixmap(QPixmap(":/images/Star_coin.png").scaled(20,20));
 
 }

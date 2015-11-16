@@ -24,6 +24,7 @@ public:
     score* getScore(){return this->Jackpot;}
     void pieceSound();
     void jumpSound();
+    QGraphicsScene* getscene(){return scene;}
 private:
     controller *control;
     QGraphicsScene * scene;
