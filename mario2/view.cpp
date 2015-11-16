@@ -76,10 +76,6 @@ void view::map()
 {
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1200,300);
-    QGraphicsView * view = new QGraphicsView(scene);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setFixedSize(600,300);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
     for (int i=0; i<control->getmodel()->getFlors()->size();i++){
          scene->addItem(control->getmodel()->getFlors()->at(i));
@@ -105,10 +101,12 @@ void view::map()
     Life->setPos(Life->x(),Life->y()+25);
     scene->addItem(Life);
     scene->addItem(control->getmodel()->getPeach());
+    QGraphicsView * view = new QGraphicsView(scene);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setFixedSize(400,300);
     view->centerOn(control->getmodel()->getPeach());
     view->show();
-    view->centerOn(control->getmodel()->getPeach());
-    scene->setFocusItem(control->getmodel()->getPeach());
        QMediaPlayer * music = new QMediaPlayer();
        music->setMedia(QUrl("qrc:/sounds/music.mp3"));
        music->play();

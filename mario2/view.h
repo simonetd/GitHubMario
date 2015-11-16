@@ -26,16 +26,14 @@ public:
     score* getScore(){return this->Jackpot;}
     void pieceSound();
     void jumpSound();
-<<<<<<< HEAD
     QGraphicsScene* getscene(){return scene;}
-=======
 public slots:
     void jouer();
 signals:
     void clicked();
->>>>>>> origin/master
 private:
     controller *control;
+    QGraphicsView* window;
     QGraphicsScene * scene;
     score * Jackpot;
     health * Life;

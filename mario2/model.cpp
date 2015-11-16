@@ -15,7 +15,9 @@ model::model()
 
     peach = new character();
 //    peach->setPos(0,225);
-    peach->setPos(0,155);
+    peach->setPos(0,150);
+    peach->setFlag(QGraphicsItem::ItemIsFocusable);
+    peach->setFocus();
 
     QFile fichier(":/map/map1.txt");
     if(fichier.open(QFile::ReadOnly)){
@@ -57,7 +59,7 @@ model::model()
             }
                 if(lineread.at(i)=='9'){
                     ennemy * Wario = new ennemy();
-                    Wario->setPos(x,y-70);
+                    Wario->setPos(x,y);
                     ennemys->append(Wario);                    
                     x=x+25;
             }

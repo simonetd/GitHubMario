@@ -84,11 +84,11 @@ void controller::down()
             Model->getPeach()->setgravitys(0);
             if(typeid(*(test3[i])) == typeid(bonus)){
                 for (int k=0;k<Model->getBonuss()->length();k++){
-                    if (Model->getBonuss()->at(i)==(test3[i])){
-                        if (Model->getBonuss()->at(i)->getemptybonus()==0){
-                            Model->getBonuss()->at(i)->emptybonus();
+                    if (Model->getBonuss()->at(k)==(test3[i])){
+                        if (Model->getBonuss()->at(k)->getemptybonus()==0){
+                            Model->getBonuss()->at(k)->emptybonus();
                             cake * cakke = new cake();
-                            cakke->setPos(Model->getBonuss()->at(i)->x()+2.5,Model->getBonuss()->at(i)->y()-25);
+                            cakke->setPos(Model->getBonuss()->at(k)->x()+2.5,Model->getBonuss()->at(k)->y()-25);
                             View->getscene()->addItem(cakke);
                         }
                     }
@@ -126,6 +126,7 @@ void controller::down()
     if (gauche==1 && Model->getPeach()->getcollisiongauche()==0){
         Model->getPeach()->setX(Model->getPeach()->x()-4);
     }
+    //View->centerOn(Model->getPeach());
 }
 
 

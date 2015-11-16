@@ -1,19 +1,16 @@
 #include "character.h"
 #include "ennemy.h"
-#include <stove.h>
 #include <QGraphicsScene>
 #include <floor.h>
 #include <QTimer>
-#include "game.h"
 #include "controller.h"
 #include <block.h>
-#include "menu.h"
 
 
 character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
     setPixmap(QPixmap(":/images/Peach/Peach2.png"));
-    grounded = 1;
+    grounded = false;
     gravitys=0;
 
 }

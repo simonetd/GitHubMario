@@ -21,7 +21,5 @@
     </qresource>
     <qresource prefix="/map">
         <file>map1.txt</file>
-        <file>map3.txt</file>
-        <file>map2.txt</file>
     </qresource>
 </RCC>

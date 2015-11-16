@@ -17,14 +17,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     character.cpp \
-    stove.cpp \
     ennemy.cpp \
     score.cpp \
     health.cpp \
     floor.cpp \
     bonus.cpp \
     block.cpp \
-    menu.cpp \
     brique.cpp \
     controller.cpp \
     view.cpp \
@@ -34,14 +32,12 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     character.h \
-    stove.h \
     ennemy.h \
     score.h \
     health.h \
     floor.h \
     bonus.h \
     block.h \
-    menu.h \
     brique.h \
     controller.h \
     view.h \
