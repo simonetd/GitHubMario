@@ -104,7 +104,7 @@ void view::map()
     QGraphicsView * view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setFixedSize(400,300);
+    view->setFixedSize(600,300);
     view->centerOn(control->getmodel()->getPeach());
     view->show();
        QMediaPlayer * music = new QMediaPlayer();
