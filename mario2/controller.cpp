@@ -7,6 +7,8 @@
 #include <QTimer>
 #include "health.h"
 #include "score.h"
+#include "bonus.h"
+#include "cake.h"
 
 
 controller::controller(model *m, view *v) : QObject()
@@ -34,11 +36,13 @@ controller::~controller()
 void controller::moveMarioLeft(){
     gauche=1;
     droite=0;
+    Model->getPeach()->peachleft();
 }
 
 void controller::moveMarioRight(){
     gauche=0;
     droite=1;
+    Model->getPeach()->peachright();
 }
 
 void controller::moveMarioJump()
@@ -78,7 +82,24 @@ void controller::down()
         }
         if (test3[i]->y()+test3[i]->boundingRect().y()-Model->getPeach()->y()<3){
             Model->getPeach()->setgravitys(0);
+            if(typeid(*(test3[i])) == typeid(bonus)){
+                for (int k=0;k<Model->getBonuss()->length();k++){
+                    if (Model->getBonuss()->at(i)==(test3[i])){
+                        if (Model->getBonuss()->at(i)->getemptybonus()==0){
+                            Model->getBonuss()->at(i)->emptybonus();
+                            cake * cakke = new cake();
+                            cakke->setPos(Model->getBonuss()->at(i)->x()+2.5,Model->getBonuss()->at(i)->y()-25);
+                            View->getscene()->addItem(cakke);
+                        }
+                    }
+                }
+            }
         }
+        if(typeid(*(test3[i])) == typeid(cake)){
+           Model->getPeach()->setScale(1.25);
+           View->deleteItem(test3[i]);
+           delete test3[i];
+}
         if (test3[i]->y()<Model->getPeach()->y()+Model->getPeach()->boundingRect().height()-10){
             if (test3[i]->x() > Model->getPeach()->x()){
                 Model->getPeach()->setcollisiondroite(1);
@@ -86,6 +107,11 @@ void controller::down()
             else Model->getPeach()->setcollisiongauche(1);
         }
         if(typeid(*(test3[i])) == typeid(piece)){
+            for (int k=0;k<Model->getPieces()->length();k++){
+                if (Model->getPieces()->at(i)==(test3[i])){
+                    Model->getPieces()->removeAt(i);
+                }
+            }
             View->deleteItem(test3[i]);
             delete test3[i];
             View->getScore()->increase();
@@ -101,6 +127,7 @@ void controller::down()
         Model->getPeach()->setX(Model->getPeach()->x()-4);
     }
 }
+
 
 void controller::move()
 {

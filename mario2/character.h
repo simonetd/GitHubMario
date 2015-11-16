@@ -20,6 +20,8 @@ public:
     void setcollisiongauche(int d);
     int getcollisiondroite(){return collisiondroite;}
     int getcollisiongauche(){return collisiongauche;}
+    void peachleft();
+    void peachright();
 
 
 signals:

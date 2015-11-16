@@ -10,9 +10,10 @@
 
 character::character(QGraphicsItem *parent):QGraphicsPixmapItem(parent)
 {
-    setPixmap(QPixmap(":/images/peach right.png").scaled(25,25));
+    setPixmap(QPixmap(":/images/Peach/Peach2.png"));
     grounded = 1;
     gravitys=0;
+
 }
 
 void character::setgravitys(int a)
@@ -33,6 +34,16 @@ void character::setcollisiondroite(int c)
 void character::setcollisiongauche(int d)
 {
     this->collisiongauche = d;
+}
+
+void character::peachleft()
+{
+   setPixmap(QPixmap(":/images/Peach/Peach1.png"));
+}
+
+void character::peachright()
+{
+    setPixmap(QPixmap(":/images/Peach/Peach2.png"));
 }
 
 

@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     controller.cpp \
     view.cpp \
     model.cpp \
-    piece.cpp
+    piece.cpp \
+    cake.cpp
 
 HEADERS  += \
     character.h \
@@ -41,7 +42,8 @@ HEADERS  += \
     controller.h \
     view.h \
     model.h \
-    piece.h
+    piece.h \
+    cake.h
 
 FORMS    +=
 
