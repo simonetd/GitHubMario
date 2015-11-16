@@ -11,23 +11,8 @@ int main(int argc, char *argv[]){
 
     model m;
     view v;
-//    controller c;
-
-//    v.setController(&c);
-
-//    c.setView(&v);
-//   c.setModel(&m);
-
     controller c(&m,&v);
 
-
-
-
-//    Game = new game();
-//    Game->show();
-
-//    Menu = new menu();
-//    Menu->show();
 
     return a.exec();
 }
