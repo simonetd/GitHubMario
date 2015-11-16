@@ -107,8 +107,11 @@ void view::map()
     scene->addItem(control->getmodel()->getPeach());
     view->centerOn(control->getmodel()->getPeach());
     view->show();
-    view->centerOn(control->getmodel()->getPeach());
-    scene->setFocusItem(control->getmodel()->getPeach());
+//    control->getmodel()->getPeach()->setFocus();
+    //    view->centerOn(control->getmodel()->getPeach());
+//    scene->setFocusItem(control->getmodel()->getPeach());
+    control->getmodel()->getPeach()->setFlag(QGraphicsItem::ItemIsFocusable);
+    control->getmodel()->getPeach()->setFocus();
        QMediaPlayer * music = new QMediaPlayer();
        music->setMedia(QUrl("qrc:/sounds/music.mp3"));
        music->play();
@@ -130,14 +133,11 @@ void view::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Space:
         control->moveMarioJump();
         break;
-<<<<<<< HEAD
     case Qt::Key_Escape:
         hide();
         menu();
         break;
 //    this->centerOn(control->getmodel()->getPeach());
-=======
->>>>>>> origin/master
     }
 }
 
