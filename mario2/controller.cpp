@@ -16,7 +16,7 @@ controller::controller(model *m, view *v) : QObject()
     this->Model = m;
     this->View = v;
     this->View->setControl(this);
-    v->map();
+    v->menu();
     gravityspeedmax=15;
 
     QTimer * TimerPeach = new QTimer();

@@ -14,7 +14,8 @@ model::model()
     this->pieces = new QList<piece *>;
 
     peach = new character();
-    peach->setPos(0,225);
+//    peach->setPos(0,225);
+    peach->setPos(0,155);
 
     QFile fichier(":/map/map1.txt");
     if(fichier.open(QFile::ReadOnly)){
@@ -56,7 +57,7 @@ model::model()
             }
                 if(lineread.at(i)=='9'){
                     ennemy * Wario = new ennemy();
-                    Wario->setPos(x,y);                   
+                    Wario->setPos(x,y-70);
                     ennemys->append(Wario);                    
                     x=x+25;
             }
