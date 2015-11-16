@@ -128,6 +128,11 @@ void view::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Space:
         control->moveMarioJump();
         break;
+    case Qt::Key_Escape:
+        hide();
+        menu();
+        break;
+//    this->centerOn(control->getmodel()->getPeach());
     }
 }
 
