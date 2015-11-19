@@ -19,7 +19,7 @@ view::view()
 
 void view::menu()
 {
-
+    ready = 0;
 
     menuFont = new QGraphicsScene();
     menuFont->setSceneRect(0,0,600,300);
@@ -29,9 +29,8 @@ void view::menu()
     setScene(menuFont);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(600,300);
 
-    QPushButton *boutonJouer = new QPushButton("Jouer");
+    boutonJouer = new QPushButton("Jouer");
     boutonJouer->setStyleSheet("border: none;"
                                "color: blue;"
                                "font: bold 20px;"
@@ -45,7 +44,7 @@ void view::menu()
 //                               "background-color: pink");
 //    boutonNiveaux->setGeometry(QRect(500, 350, 200, 30));
 
-    QPushButton *boutonQuitter = new QPushButton("Quitter");
+    boutonQuitter = new QPushButton("Quitter");
     boutonQuitter->setStyleSheet("border: none;"
                                  "color: red;"
                                  "font: bold 20px;"
@@ -65,8 +64,7 @@ void view::menu()
 
 void view::jouer()
 {
-    this->hide();
-//    qDeleteAll(scene->items());
+    hide();
     map();
 }
 
@@ -75,7 +73,7 @@ void view::jouer()
 void view::map()
 {
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,1200,300);
+    scene->setSceneRect(0,0,600,300);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
     for (int i=0; i<control->getmodel()->getFlors()->size();i++){
          scene->addItem(control->getmodel()->getFlors()->at(i));
@@ -101,12 +99,12 @@ void view::map()
     Life->setPos(Life->x(),Life->y()+25);
     scene->addItem(Life);
     scene->addItem(control->getmodel()->getPeach());
-    QGraphicsView * view = new QGraphicsView(scene);
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setFixedSize(600,300);
-    view->centerOn(control->getmodel()->getPeach());
-    view->show();
+    view2 = new QGraphicsView(scene);
+    view2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view2->show();
+
+    ready = 1;
        QMediaPlayer * music = new QMediaPlayer();
        music->setMedia(QUrl("qrc:/sounds/music.mp3"));
        music->play();
@@ -132,7 +130,6 @@ void view::keyPressEvent(QKeyEvent *event)
         hide();
         menu();
         break;
-//    this->centerOn(control->getmodel()->getPeach());
     }
 }
 

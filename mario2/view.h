@@ -7,6 +7,7 @@
 #include "character.h"
 #include "health.h"
 #include "score.h"
+#include <QPushButton>
 
 
 class controller;
@@ -18,6 +19,7 @@ public:
     view();
     void setControl(controller *control){this->control = control;}
     void map();
+    void createmap();
     void menu();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
@@ -26,6 +28,7 @@ public:
     score* getScore(){return this->Jackpot;}
     void pieceSound();
     void jumpSound();
+    bool getready(){return this->ready;}
     QGraphicsScene* getscene(){return scene;}
 public slots:
     void jouer();
@@ -33,11 +36,17 @@ signals:
     void clicked();
 private:
     controller *control;
+    QGraphicsView* view2;
     QGraphicsView* window;
     QGraphicsScene * scene;
     score * Jackpot;
     health * Life;
     QGraphicsScene * menuFont;
+    QPushButton *boutonQuitter ;
+    QPushButton *boutonJouer;
+    bool ready;
+
+
 
 };
 

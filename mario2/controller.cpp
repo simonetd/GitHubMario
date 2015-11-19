@@ -17,11 +17,11 @@ controller::controller(model *m, view *v) : QObject()
     this->View = v;
     this->View->setControl(this);
     v->menu();
-    gravityspeedmax=15;
+    gravityspeedmax=4;
 
     QTimer * TimerPeach = new QTimer();
     QObject::connect(TimerPeach,SIGNAL(timeout()),this,SLOT(down()));
-    TimerPeach->start(50);
+    TimerPeach->start(25);
 
     QTimer * TimerEnnemys = new QTimer();
     QObject::connect(TimerEnnemys,SIGNAL(timeout()),this,SLOT(move()));
@@ -48,7 +48,7 @@ void controller::moveMarioRight(){
 void controller::moveMarioJump()
 {
     if (Model->getPeach()->getgrounded()== true){
-        Model->getPeach()->setgravitys(-15);
+        Model->getPeach()->setgravitys(-10);
         Model->getPeach()->setgrounded(false);
         View->jumpSound();
         gravity(Model->getPeach());
@@ -63,75 +63,95 @@ void controller::MarioStand()
 
 void controller::gravity(character* item)
 {
-    if (item->getgrounded()== false && item->getgravitys()<gravityspeedmax){
-        item->setgravitys(item->getgravitys()+2);
+    if (item->getgrounded()== false){
+        if (item->getgravitys()<= gravityspeedmax){            
+                item->setgravitys(item->getgravitys()+1);}
         item->setY(item->y() + item->getgravitys());
     }
 }
 
 void controller::down()
 {
-    Model->getPeach()->setgrounded(false);
-    Model->getPeach()->setcollisiondroite(0);
-    Model->getPeach()->setcollisiongauche(0);
-    QList<QGraphicsItem *> test3 = Model->getPeach()->collidingItems();
-    for (int i=0;i<test3.size();i++){
-        if ( test3[i]->y() > Model->getPeach()->y()+Model->getPeach()->boundingRect().y()){
-            Model->getPeach()->setgrounded(true);
-            Model->getPeach()->setgravitys(0);
-        }
-        if (test3[i]->y()+test3[i]->boundingRect().y()-Model->getPeach()->y()<3){
-            Model->getPeach()->setgravitys(0);
-            if(typeid(*(test3[i])) == typeid(bonus)){
-                for (int k=0;k<Model->getBonuss()->length();k++){
-                    if (Model->getBonuss()->at(k)==(test3[i])){
-                        if (Model->getBonuss()->at(k)->getemptybonus()==0){
-                            Model->getBonuss()->at(k)->emptybonus();
-                            cake * cakke = new cake();
-                            cakke->setPos(Model->getBonuss()->at(k)->x()+2.5,Model->getBonuss()->at(k)->y()-25);
-                            View->getscene()->addItem(cakke);
+    if (View->getready()==1){
+        Model->getPeach()->setgrounded(false);
+        Model->getPeach()->setcollisiondroite(0);
+        Model->getPeach()->setcollisiongauche(0);
+        QList<QGraphicsItem *> test3 = Model->getPeach()->collidingItems();
+        for (int i=0;i<test3.size();i++){
+            if ( Model->getPeach()->y()+ Model->getPeach()->boundingRect().height()-1 == test3[i]->y() ) {
+                Model->getPeach()->setgrounded(true);
+            }
+
+            if ( (test3[i]->y()+1 < Model->getPeach()->y()+ Model->getPeach()->boundingRect().height()) && Model->getPeach()->y()< test3[i]->y()){
+                    Model->getPeach()->setgrounded(true);
+                    Model->getPeach()->setY(test3[i]->y()- Model->getPeach()->boundingRect().height()+1);
+                    Model->getPeach()->setgravitys(0);
+                }
+            if (test3[i]->y()+test3[i]->boundingRect().y()-Model->getPeach()->y()<3){
+                Model->getPeach()->setgravitys(0);
+                if(typeid(*(test3[i])) == typeid(bonus)){
+                    for (int k=0;k<Model->getBonuss()->length();k++){
+                        if (Model->getBonuss()->at(k)==(test3[i])){
+                            if (Model->getBonuss()->at(k)->getemptybonus()==0){
+                                Model->getBonuss()->at(k)->emptybonus();
+                                cake * cakke = new cake();
+                                cakke->setPos(Model->getBonuss()->at(k)->x()+2.5,Model->getBonuss()->at(k)->y()-25);
+                                View->getscene()->addItem(cakke);
+                            }
                         }
                     }
                 }
             }
-        }
-        if(typeid(*(test3[i])) == typeid(cake)){
-           Model->getPeach()->setScale(1.25);
-           View->deleteItem(test3[i]);
-           delete test3[i];
-}
-        if (test3[i]->y()<Model->getPeach()->y()+Model->getPeach()->boundingRect().height()-10){
-            if (test3[i]->x() > Model->getPeach()->x()){
-                Model->getPeach()->setcollisiondroite(1);
+            if(typeid(*(test3[i])) == typeid(cake)){
+                Model->getPeach()->setScale(1.25);
+                View->deleteItem(test3[i]);
+                delete test3[i];
             }
-            else Model->getPeach()->setcollisiongauche(1);
-        }
-        if(typeid(*(test3[i])) == typeid(piece)){
-            for (int k=0;k<Model->getPieces()->length();k++){
-                if (Model->getPieces()->at(i)==(test3[i])){
-                    Model->getPieces()->removeAt(i);
+            if (Model->getPeach()->x() > test3[i]->x() && ( Model->getPeach()->x() < test3[i]->x() + test3[i]->boundingRect().width()) ){
+                if ((Model->getPeach()->y() > test3[i]->y() && Model->getPeach()->y() < test3[i]->y()+test3[i]->boundingRect().height()) ||
+                        (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()) && (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()+test3[i]->boundingRect().height()) ){
+                    Model->getPeach()->setcollisiongauche(1);
                 }
             }
-            View->deleteItem(test3[i]);
-            delete test3[i];
-            View->getScore()->increase();
-            View->pieceSound();
+            if (Model->getPeach()->x() + Model->getPeach()->boundingRect().x() > test3[i]->x() && ( Model->getPeach()->x()  + Model->getPeach()->boundingRect().x() < test3[i]->x() + test3[i]->boundingRect().width()) ){
+                if ((Model->getPeach()->y() > test3[i]->y() && Model->getPeach()->y() < test3[i]->y()+test3[i]->boundingRect().height()) ||
+                        (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()) && (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()+test3[i]->boundingRect().height()) ){
+                    Model->getPeach()->setcollisiondroite(1);
+                }
+}
+
+            if(typeid(*(test3[i])) == typeid(piece)){
+                for (int k=0;k<Model->getPieces()->length();k++){
+                    if (Model->getPieces()->at(i)==(test3[i])){
+                        Model->getPieces()->removeAt(i);
+                    }
+                }
+                View->deleteItem(test3[i]);
+                delete test3[i];
+                View->getScore()->increase();
+                View->pieceSound();
+
+            }
+        }
+
+        gravity(Model->getPeach());
+        if (droite==1 && Model->getPeach()->getcollisiondroite()==0){
+            Model->getPeach()->setX(Model->getPeach()->x()+2);
 
         }
+        if (gauche==1 && Model->getPeach()->getcollisiongauche()==0){
+            Model->getPeach()->setX(Model->getPeach()->x()-2);
+        }
+        if(Model->getPeach()->pos().x()>=300){
+            View->getscene()->setSceneRect(Model->getPeach()->pos().x()-300,0,600,300);
+        }
     }
-    gravity(Model->getPeach());
-    if (droite==1 && Model->getPeach()->getcollisiondroite()==0){
-        Model->getPeach()->setX(Model->getPeach()->x()+4);
-    }
-    if (gauche==1 && Model->getPeach()->getcollisiongauche()==0){
-        Model->getPeach()->setX(Model->getPeach()->x()-4);
-    }
-    //View->centerOn(Model->getPeach());
 }
 
 
 void controller::move()
 {
+    if(View->getready()==1){
 
     for (int i=0; i<Model->getEnnemys()->length();i++){
         Model->getEnnemys()->at(i)->setgrounded(false);
@@ -153,13 +173,17 @@ void controller::move()
                 Model->getEnnemys()->at(i)->changedirection();
             }
             if(typeid(*(colliding_items[k])) == typeid(character) || Model->getEnnemys()->at(i)->y() > 300){
-               // Rajouter Collision Haut pr delete l'ennemy et si collision haut ne pas decrease
+               if(Model->getEnnemys()->at(i)->y() < colliding_items[k]->y() + colliding_items[k]->boundingRect().height() && Model->getEnnemys()->at(i)->y() > colliding_items[k]->y() + colliding_items[k]->boundingRect().height() -10){
                View->deleteItem(Model->getEnnemys()->at(i));
                 delete Model->getEnnemys()->at(i);
                 Model->getEnnemys()->removeAt(i);
+               }
+               else{
                 View->getHealth()->decrease();
+               moveMarioJump();}
                 return;}
         }
            gravity(Model->getEnnemys()->at(i));
+}
 }
 }
