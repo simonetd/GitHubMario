@@ -30,6 +30,8 @@ public:
     void jumpSound();
     bool getready(){return this->ready;}
     QGraphicsScene* getscene(){return scene;}
+    void gameOver();
+    void youLose();
 public slots:
     void jouer();
 signals:
@@ -45,6 +47,7 @@ private:
     QPushButton *boutonQuitter ;
     QPushButton *boutonJouer;
     bool ready;
+    QGraphicsScene * endFont;
 
 
 

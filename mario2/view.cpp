@@ -163,3 +163,26 @@ void view::jumpSound()
     jumpSound->setMedia(QUrl("qrc:/sounds/jump.wav"));
     jumpSound->play();
 }
+
+void view::gameOver()
+{
+    hide();
+    view2->hide();
+    youLose();
+}
+
+void view::youLose()
+{
+    ready = 0;
+
+    endFont = new QGraphicsScene();
+    endFont->setSceneRect(0,0,600,300);
+    QImage imageEndTemp("://images/peachEnd.png");
+    QImage imageEnd = imageEndTemp.scaled(600, 300);
+    setBackgroundBrush(QBrush(imageEnd));
+    setScene(endFont);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    show();
+}

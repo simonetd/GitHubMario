@@ -26,6 +26,10 @@ controller::controller(model *m, view *v) : QObject()
     QTimer * TimerEnnemys = new QTimer();
     QObject::connect(TimerEnnemys,SIGNAL(timeout()),this,SLOT(move()));
     TimerEnnemys->start(50);
+
+    QTimer * TimerEnd = new QTimer();
+    QObject::connect(TimerEnd,SIGNAL(timeout()),this, SLOT(endGame()));
+    TimerEnd->start(50);
 }
 
 controller::~controller()
@@ -64,8 +68,8 @@ void controller::MarioStand()
 void controller::gravity(character* item)
 {
     if (item->getgrounded()== false){
-        if (item->getgravitys()<= gravityspeedmax){            
-                item->setgravitys(item->getgravitys()+1);}
+        if (item->getgravitys()<= gravityspeedmax){
+            item->setgravitys(item->getgravitys()+1);}
         item->setY(item->y() + item->getgravitys());
     }
 }
@@ -83,10 +87,10 @@ void controller::down()
             }
 
             if ( (test3[i]->y()+1 < Model->getPeach()->y()+ Model->getPeach()->boundingRect().height()) && Model->getPeach()->y()< test3[i]->y()){
-                    Model->getPeach()->setgrounded(true);
-                    Model->getPeach()->setY(test3[i]->y()- Model->getPeach()->boundingRect().height()+1);
-                    Model->getPeach()->setgravitys(0);
-                }
+                Model->getPeach()->setgrounded(true);
+                Model->getPeach()->setY(test3[i]->y()- Model->getPeach()->boundingRect().height()+1);
+                Model->getPeach()->setgravitys(0);
+            }
             if (test3[i]->y()+test3[i]->boundingRect().y()-Model->getPeach()->y()<3){
                 Model->getPeach()->setgravitys(0);
                 if(typeid(*(test3[i])) == typeid(bonus)){
@@ -118,7 +122,7 @@ void controller::down()
                         (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()) && (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()+test3[i]->boundingRect().height()) ){
                     Model->getPeach()->setcollisiondroite(1);
                 }
-}
+            }
 
             if(typeid(*(test3[i])) == typeid(piece)){
                 for (int k=0;k<Model->getPieces()->length();k++){
@@ -153,37 +157,43 @@ void controller::move()
 {
     if(View->getready()==1){
 
-    for (int i=0; i<Model->getEnnemys()->length();i++){
-        Model->getEnnemys()->at(i)->setgrounded(false);
-        if(Model->getEnnemys()->at(i)->getdirection()==1){
-            Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()+3);
-        }
-        if(Model->getEnnemys()->at(i)->getdirection()==0) {
-            Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()-3);
-        }
-
-        QList<QGraphicsItem *> colliding_items = Model->getEnnemys()->at(i)->collidingItems();
-        for (int k=0, n = colliding_items.size(); k < n;k++){
-
-            if ( colliding_items[k]->y() > Model->getEnnemys()->at(i)->y()+Model->getEnnemys()->at(i)->boundingRect().y()){
-                Model->getEnnemys()->at(i)->setgrounded(true);
-                Model->getEnnemys()->at(i)->setgravitys(0);
+        for (int i=0; i<Model->getEnnemys()->length();i++){
+            Model->getEnnemys()->at(i)->setgrounded(false);
+            if(Model->getEnnemys()->at(i)->getdirection()==1){
+                Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()+3);
             }
-            if(Model->getEnnemys()->at(i)->y() >= colliding_items[k]->y() + colliding_items[k]->boundingRect().y()){
-                Model->getEnnemys()->at(i)->changedirection();
+            if(Model->getEnnemys()->at(i)->getdirection()==0) {
+                Model->getEnnemys()->at(i)->setX(Model->getEnnemys()->at(i)->x()-3);
             }
-            if(typeid(*(colliding_items[k])) == typeid(character) || Model->getEnnemys()->at(i)->y() > 300){
-               if(Model->getEnnemys()->at(i)->y() < colliding_items[k]->y() + colliding_items[k]->boundingRect().height() && Model->getEnnemys()->at(i)->y() > colliding_items[k]->y() + colliding_items[k]->boundingRect().height() -10){
-               View->deleteItem(Model->getEnnemys()->at(i));
-                delete Model->getEnnemys()->at(i);
-                Model->getEnnemys()->removeAt(i);
-               }
-               else{
-                View->getHealth()->decrease();
-               moveMarioJump();}
-                return;}
+
+            QList<QGraphicsItem *> colliding_items = Model->getEnnemys()->at(i)->collidingItems();
+            for (int k=0, n = colliding_items.size(); k < n;k++){
+
+                if ( colliding_items[k]->y() > Model->getEnnemys()->at(i)->y()+Model->getEnnemys()->at(i)->boundingRect().y()){
+                    Model->getEnnemys()->at(i)->setgrounded(true);
+                    Model->getEnnemys()->at(i)->setgravitys(0);
+                }
+                if(Model->getEnnemys()->at(i)->y() >= colliding_items[k]->y() + colliding_items[k]->boundingRect().y()){
+                    Model->getEnnemys()->at(i)->changedirection();
+                }
+                if(typeid(*(colliding_items[k])) == typeid(character) || Model->getEnnemys()->at(i)->y() > 300){
+                    if(Model->getEnnemys()->at(i)->y() < colliding_items[k]->y() + colliding_items[k]->boundingRect().height() && Model->getEnnemys()->at(i)->y() > colliding_items[k]->y() + colliding_items[k]->boundingRect().height() -10){
+                        View->deleteItem(Model->getEnnemys()->at(i));
+                        delete Model->getEnnemys()->at(i);
+                        Model->getEnnemys()->removeAt(i);
+                    }
+                    else{
+                        View->getHealth()->decrease();
+                        moveMarioJump();}
+                    return;}
+            }
+            gravity(Model->getEnnemys()->at(i));
         }
-           gravity(Model->getEnnemys()->at(i));
+    }
 }
-}
+
+void controller::endGame(){
+    if (View->getready()==1 && Model->getPeach()->y()>350 || (View->getready()==1 && View->getHealth()<=0)) {
+        View->gameOver();
+    }
 }

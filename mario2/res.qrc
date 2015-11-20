@@ -19,6 +19,7 @@
         <file>cake.png</file>
         <file>Peach/Peach1.png</file>
         <file>Peach/Peach2.png</file>
+        <file>peachEnd.png</file>
     </qresource>
     <qresource prefix="/map">
         <file>map1.txt</file>

@@ -20,6 +20,7 @@ public:
 public slots:
     void down();
     void move();
+    void endGame();
 private:
     model *Model;
     view *View;
