@@ -148,7 +148,9 @@ void controller::down()
         }
         if(Model->getPeach()->pos().x()>=300){
             View->getscene()->setSceneRect(Model->getPeach()->pos().x()-300,0,600,300);
-        }
+            View->getHealth()->setX(Model->getPeach()->pos().x()-300);
+            View->getScore()->setX(Model->getPeach()->pos().x()-300);
+        }       
     }
 }
 

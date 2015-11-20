@@ -27,6 +27,7 @@ void view::menu()
     QImage imageFont = imageFontTemp.scaled(600, 300);
     setBackgroundBrush(QBrush(imageFont));
     setScene(menuFont);
+    setFixedSize(600, 300);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -75,6 +76,7 @@ void view::map()
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,600,300);
     scene->setBackgroundBrush(QBrush(QImage(":/images/bg.png")));
+    setFixedSize(1200, 300);
     for (int i=0; i<control->getmodel()->getFlors()->size();i++){
          scene->addItem(control->getmodel()->getFlors()->at(i));
     }
@@ -128,6 +130,7 @@ void view::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Escape:
         hide();
+        view2->hide();
         menu();
         break;
     }
@@ -180,6 +183,7 @@ void view::youLose()
     QImage imageEndTemp("://images/peachEnd.png");
     QImage imageEnd = imageEndTemp.scaled(600, 300);
     setBackgroundBrush(QBrush(imageEnd));
+    setFixedSize(600, 300);
     setScene(endFont);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
