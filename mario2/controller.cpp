@@ -85,11 +85,24 @@ void controller::down()
             if ( Model->getPeach()->y()+ Model->getPeach()->boundingRect().height()-1 == test3[i]->y() ) {
                 Model->getPeach()->setgrounded(true);
             }
+            if(typeid(*(test3[i])) == typeid(piece)){
+                for (int k=0;k<Model->getPieces()->length();k++){
+                    if (Model->getPieces()->at(i)==(test3[i])){
+                        Model->getPieces()->removeAt(i);
+                    }
+                }
+                View->deleteItem(test3[i]);
+                delete test3[i];
+                View->getScore()->increase();
+                View->pieceSound();
+                return;
 
+            }
             if ( (test3[i]->y()+1 < Model->getPeach()->y()+ Model->getPeach()->boundingRect().height()) && Model->getPeach()->y()< test3[i]->y()){
-                Model->getPeach()->setgrounded(true);
-                Model->getPeach()->setY(test3[i]->y()- Model->getPeach()->boundingRect().height()+1);
-                Model->getPeach()->setgravitys(0);
+                if((Model->getPeach()->y()+ 20 <  test3[i]->y()) && ((test3[i]->x()+test3[i]->boundingRect().width()-Model->getPeach()->x()>10)) || Model->getPeach()->boundingRect().width()+Model->getPeach()->y()-test3[i]->y()>10){
+                    Model->getPeach()->setgrounded(true);
+                    Model->getPeach()->setgravitys(0);
+                    Model->getPeach()->setY(test3[i]->y()- Model->getPeach()->boundingRect().height()+1);}
             }
             if (test3[i]->y()+test3[i]->boundingRect().y()-Model->getPeach()->y()<3){
                 Model->getPeach()->setgravitys(0);
@@ -109,36 +122,20 @@ void controller::down()
             if(typeid(*(test3[i])) == typeid(cake)){
                 Model->getPeach()->setScale(1.25);
                 View->deleteItem(test3[i]);
-                delete test3[i];
+                //delete test3[i];
             }
-            if (Model->getPeach()->x() > test3[i]->x() && ( Model->getPeach()->x() < test3[i]->x() + test3[i]->boundingRect().width()) ){
-                if ((Model->getPeach()->y() > test3[i]->y() && Model->getPeach()->y() < test3[i]->y()+test3[i]->boundingRect().height()) ||
-                        (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()) && (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()+test3[i]->boundingRect().height()) ){
+            if (Model->getPeach()->x() < test3[i]->x()+ test3[i]->boundingRect().width() && ( Model->getPeach()->x() > test3[i]->x() )){
+                if (Model->getPeach()->y()+ 20 >  test3[i]->y() ){
                     Model->getPeach()->setcollisiongauche(1);
                 }
             }
-            if (Model->getPeach()->x() + Model->getPeach()->boundingRect().x() > test3[i]->x() && ( Model->getPeach()->x()  + Model->getPeach()->boundingRect().x() < test3[i]->x() + test3[i]->boundingRect().width()) ){
-                if ((Model->getPeach()->y() > test3[i]->y() && Model->getPeach()->y() < test3[i]->y()+test3[i]->boundingRect().height()) ||
-                        (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()) && (Model->getPeach()->y()+Model->getPeach()->boundingRect().height()>test3[i]->y()+test3[i]->boundingRect().height()) ){
+            if (Model->getPeach()->x() + Model->getPeach()->boundingRect().width() > test3[i]->x() && (Model->getPeach()->x() < test3[i]->x() )){
+                if (Model->getPeach()->y()+ 20 >  test3[i]->y() ){
                     Model->getPeach()->setcollisiondroite(1);
                 }
             }
-
-            if(typeid(*(test3[i])) == typeid(piece)){
-                for (int k=0;k<Model->getPieces()->length();k++){
-                    if (Model->getPieces()->at(i)==(test3[i])){
-                        Model->getPieces()->removeAt(i);
-                    }
-                }
-                View->deleteItem(test3[i]);
-                delete test3[i];
-                View->getScore()->increase();
-                View->pieceSound();
-
-            }
         }
 
-        gravity(Model->getPeach());
         if (droite==1 && Model->getPeach()->getcollisiondroite()==0){
             Model->getPeach()->setX(Model->getPeach()->x()+2);
 
@@ -150,9 +147,12 @@ void controller::down()
             View->getscene()->setSceneRect(Model->getPeach()->pos().x()-300,0,600,300);
             View->getHealth()->setX(Model->getPeach()->pos().x()-300);
             View->getScore()->setX(Model->getPeach()->pos().x()-300);
-        }       
+        }
+        gravity(Model->getPeach());
     }
+
 }
+
 
 
 void controller::move()
@@ -186,7 +186,7 @@ void controller::move()
                     }
                     else{
                         View->getHealth()->decrease();
-                        moveMarioJump();}
+                        Model->getPeach()->setScale(1);}
                     return;}
             }
             gravity(Model->getEnnemys()->at(i));
@@ -195,7 +195,7 @@ void controller::move()
 }
 
 void controller::endGame(){
-    if (View->getready()==1 && Model->getPeach()->y()>350 || (View->getready()==1 && View->getHealth()<=0)) {
+    if (((View->getready()==1) && (Model->getPeach()->y()>350))|| ((View->getready()==1) && (View->getHealth()->gethealth() == 0))) {
         View->gameOver();
     }
 }

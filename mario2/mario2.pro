@@ -7,8 +7,6 @@
 QT       += core gui \
             multimedia
 
-QMAKE_MAC_SDK = macosx10.11
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = mario2

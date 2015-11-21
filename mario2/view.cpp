@@ -179,7 +179,7 @@ void view::youLose()
     ready = 0;
 
     endFont = new QGraphicsScene();
-    endFont->setSceneRect(0,0,600,300);
+
     QImage imageEndTemp("://images/peachEnd.png");
     QImage imageEnd = imageEndTemp.scaled(600, 300);
     setBackgroundBrush(QBrush(imageEnd));
@@ -187,6 +187,7 @@ void view::youLose()
     setScene(endFont);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    endFont->setSceneRect(0,0,600,300);
 
     show();
 }
